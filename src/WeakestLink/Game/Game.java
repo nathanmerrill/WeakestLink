@@ -17,7 +17,8 @@ public class Game {
     private boolean finished;
     public Game(){
         allPlayers = new HashSet<>(PlayerFactory.getAllPlayerTypes());
-        numRounds = MINIMUM_NUMBER_OF_ROUNDS%(allPlayers.size()*NUMBER_PLAYERS_PER_ROUND) + MINIMUM_NUMBER_OF_ROUNDS;
+        numRounds = Math.max(MINIMUM_NUMBER_OF_ROUNDS*allPlayers.size()/NUMBER_PLAYERS_PER_ROUND + 1,
+                MINIMUM_NUMBER_OF_ROUNDS);
         random = new Random();
         unusedPlayers = new ArrayList<>(allPlayers);
         scoreboard = new Scoreboard();
