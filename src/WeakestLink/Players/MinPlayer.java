@@ -10,9 +10,4 @@ public class MinPlayer extends Player {
     public int vote(List<Integer> currentPlayers, Map<Integer, Integer> historicalVotes) {
         return Collections.min(currentPlayers);
     }
-
-    @Override
-    public String getName() {
-        return "Minimum Player";
-    }
 }

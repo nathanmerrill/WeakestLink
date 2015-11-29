@@ -40,7 +40,7 @@ public class Game {
             Round round = new Round(players, this);
             Player winner = round.findWinner();
             int score = round.getPot();
-            scoreboard.addScore(winner, score);
+            scoreboard.addScore(winner.getClass(), score);
         }
         finished = true;
     }
@@ -49,7 +49,7 @@ public class Game {
         if (!finished){
             throw new RuntimeException("Game not run yet");
         }
-        for (Player player: scoreboard.topPlayers()){
+        for (Class<? extends Player> player: scoreboard.topPlayers()){
             System.out.println(scoreboard.scoreFor(player)+"\t"+player.getName());
         }
     }

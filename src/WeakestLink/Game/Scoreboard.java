@@ -8,29 +8,25 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 public class Scoreboard {
-    private final Map<String, Integer> scores;
-    private final Map<String, Player> playerNames;
+    private final Map<Class<? extends Player>, Integer> scores;
 
     public Scoreboard(){
         scores = new HashMap<>();
-        playerNames = new HashMap<>();
     }
 
-    public void addScore(Player player, int score){
-        playerNames.put(player.getName(), player);
-        scores.merge(player.getName(), score, (a, b) -> a+b);
+    public void addScore(Class<? extends Player> player, int score){
+        scores.merge(player, score, (a, b) -> a+b);
     }
 
-    public List<Player> topPlayers(){
+    public List<Class<? extends Player>> topPlayers(){
         return scores.entrySet().stream()
                 .sorted((s1, s2) -> s2.getValue().compareTo(s1.getValue()))
                 .map(Map.Entry::getKey)
-                .map(playerNames::get)
                 .collect(Collectors.toList());
 
     }
 
-    public int scoreFor(Player player){
-        return scores.get(player.getName());
+    public int scoreFor(Class<? extends Player> player){
+        return scores.get(player);
     }
 }

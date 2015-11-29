@@ -20,6 +20,4 @@ public abstract class Player {
     }
 
     public abstract int vote(List<Integer> currentPlayers, Map<Integer, Integer> historicalVotes);
-
-    public abstract String getName();
 }

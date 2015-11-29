@@ -9,9 +9,4 @@ public class RandomPlayer extends Player{
     public int vote(List<Integer> currentPlayers, Map<Integer, Integer> historicalVotes) {
         return currentPlayers.get(getRandom().nextInt(currentPlayers.size()));
     }
-
-    @Override
-    public String getName() {
-        return "Random Player";
-    }
 }

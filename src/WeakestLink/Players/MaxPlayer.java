@@ -9,9 +9,4 @@ public class MaxPlayer extends Player{
     public int vote(List<Integer> currentPlayers, Map<Integer, Integer> historicalVotes) {
         return Collections.max(currentPlayers);
     }
-
-    @Override
-    public String getName() {
-        return "Maximum Player";
-    }
 }
