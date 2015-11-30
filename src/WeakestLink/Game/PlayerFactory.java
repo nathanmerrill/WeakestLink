@@ -32,7 +32,7 @@ public class PlayerFactory {
 
     public static List<Player> createAndInitialize(Collection<Class<? extends Player>> playerTypes, Random random){
         List<Player> players = createPlayers(playerTypes);
-        players.forEach(player -> player.initialize(random));
+        players.forEach(player -> player.setRandom(random));
         return players;
     }
 

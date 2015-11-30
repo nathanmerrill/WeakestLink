@@ -12,11 +12,13 @@ public class Round {
     private final Map<Player, Integer> playerToSmartness;
     private final Map<Integer, Player> smartnessToPlayer;
     private final Set<Player> currentPlayers;
-    private final Map<Player, Map<Player, Integer>> votes;
+    private final Set<Vote> votes;
     private final Game parent;
 
     private boolean ran;
     private int pot;
+    private int currentTurn;
+
     public Round(List<Player> players, Game parent){
         pot = 0;
         currentPlayers = new HashSet<>(players);
@@ -28,9 +30,10 @@ public class Round {
                 IntStream.range(0, currentPlayers.size())
                 .boxed()
                 .collect(Collectors.toMap(Function.identity(), players::get));
-        votes = new HashMap<>();
-        players.forEach(player -> votes.put(player, new HashMap<>()));
+        currentPlayers.forEach(player -> player.setSmartness(playerToSmartness.get(player)));
+        votes = new HashSet<>();
         ran = false;
+        currentTurn = 0;
         this.parent = parent;
     }
     public Player findWinner(){
@@ -42,6 +45,7 @@ public class Round {
         while (currentPlayers.size() > FACE_OFF_THRESHOLD){
             addToPot();
             voteOff();
+            currentTurn++;
         }
         return faceOff();
     }
@@ -68,42 +72,37 @@ public class Round {
     }
 
     private void voteOff(){
-        Map<Player, Player> currentVotes =
+        Set<Vote> currentVotes =
                 currentPlayers.stream()
-                        .collect(Collectors.toMap(Function.identity(), this::vote));
+                        .map(this::vote)
+                        .collect(Collectors.toSet());
+        votes.addAll(currentVotes);
 
-        for (Map.Entry<Player, Player> vote: currentVotes.entrySet()){
-            votes.get(vote.getKey()).merge(vote.getValue(), 1, (a, b) -> a+b);
-        }
-
-        Player votedOff =  currentVotes.values().stream()
-                .collect(Collectors.groupingBy(Function.identity(), Collectors.counting()))
+        Integer votedOff =  currentVotes.stream()
+                .collect(Collectors.groupingBy(Vote::getVoted, Collectors.counting()))
                 .entrySet().stream()
                 .max(this::compareVoteCounts).get().getKey();
 
-        currentPlayers.remove(votedOff);
-
+        currentPlayers.remove(smartnessToPlayer.get(votedOff));
     }
 
-    private int compareVoteCounts(Map.Entry<Player, Long> a, Map.Entry<Player, Long> b){
+    private int compareVoteCounts(Map.Entry<Integer, Long> a, Map.Entry<Integer, Long> b){
         if (a.getValue().equals(b.getValue())){
-            return playerToSmartness.get(a.getKey()).compareTo(playerToSmartness.get(b.getKey()));
+            return a.getKey().compareTo(b.getKey());
         }
         return a.getValue().compareTo(b.getValue());
     }
 
 
 
-    private Player vote(Player player){
-        Map<Integer, Integer> historicalVotes =
-                votes.get(player).entrySet()
-                .stream()
-                .collect(Collectors.toMap(
-                        e -> playerToSmartness.get(e.getKey()),
-                        Map.Entry::getValue
-                ));
-        List<Integer> players = currentPlayers.stream().map(playerToSmartness::get).collect(Collectors.toList());
-        return smartnessToPlayer.get(player.vote(players, historicalVotes));
+    private Vote vote(Player player){
+        player.setVotingHistory(new HashSet<>(votes));
+        player.setTurnNumber(currentTurn);
+        List<Integer> players = currentPlayers.stream()
+                .filter(p -> p != player)
+                .map(playerToSmartness::get)
+                .collect(Collectors.toList());
+        return new Vote(playerToSmartness.get(player), player.vote(players), currentTurn);
     }
 
 }
