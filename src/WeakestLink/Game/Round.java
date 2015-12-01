@@ -98,11 +98,15 @@ public class Round {
     private Vote vote(Player player){
         player.setVotingHistory(new HashSet<>(votes));
         player.setTurnNumber(currentTurn);
-        List<Integer> players = currentPlayers.stream()
+        Set<Integer> players = currentPlayers.stream()
                 .filter(p -> p != player)
                 .map(playerToSmartness::get)
-                .collect(Collectors.toList());
-        return new Vote(playerToSmartness.get(player), player.vote(players), currentTurn);
+                .collect(Collectors.toSet());
+        int vote = player.vote(players);
+        if (!currentPlayers.contains(smartnessToPlayer.get(vote))){
+            throw new RuntimeException("Voted off non-existent player");
+        }
+        return new Vote(playerToSmartness.get(player), vote, currentTurn);
     }
 
 }

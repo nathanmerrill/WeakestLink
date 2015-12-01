@@ -1,11 +1,11 @@
 package WeakestLink.Players;
 
-import java.util.List;
+import java.util.Set;
 
 public class RandomPlayer extends Player{
 
     @Override
-    public int vote(List<Integer> currentOpponents) {
-        return currentOpponents.get(getRandom().nextInt(currentOpponents.size()));
+    public int vote(Set<Integer> currentOpponents) {
+        return (int) currentOpponents.toArray()[getRandom().nextInt(currentOpponents.size())];
     }
 }
