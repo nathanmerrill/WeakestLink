@@ -5,7 +5,7 @@ import WeakestLink.Players.Player;
 import java.util.*;
 
 public class Game {
-    public final static int MINIMUM_NUMBER_OF_ROUNDS = 1000;
+    public final static int MINIMUM_NUMBER_OF_ROUNDS = 10000;
     public final static int NUMBER_PLAYERS_PER_ROUND = 9;
     public final static Random random = new Random();
 
