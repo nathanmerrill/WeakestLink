@@ -16,6 +16,7 @@ public class PlayerFactory {
         playerCreators.put(MeanPlayer.class, MeanPlayer::new);
         playerCreators.put(Sniper.class, Sniper::new);
         playerCreators.put(MedianPlayer.class, MedianPlayer::new);
+        playerCreators.put(TheCult.class, TheCult::new);
 
     }
 
