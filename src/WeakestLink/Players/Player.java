@@ -12,6 +12,7 @@ public abstract class Player {
     private Set<Vote> votingHistory;
     private int turnNumber;
     private int smartness;
+    private int pot;
 
     private boolean recentVoteFilter(Vote vote){
         return vote.getRound() == turnNumber - 1;
@@ -39,6 +40,10 @@ public abstract class Player {
 
     public void setSmartness(int smartness){
         this.smartness = smartness;
+    }
+
+    public void setPot(int pot){
+        this.pot = pot;
     }
 
     protected Set<Vote> getVotingHistory() {
@@ -114,6 +119,9 @@ public abstract class Player {
                 .collect(Collectors.toList()).get(0);
     }
 
+    protected int getPot(){
+        return pot;
+    }
 
     public abstract int vote(Set<Integer> currentOpponents);
 }

@@ -98,6 +98,7 @@ public class Round {
     private Vote vote(Player player){
         player.setVotingHistory(new HashSet<>(votes));
         player.setTurnNumber(currentTurn);
+        player.setPot(pot);
         Set<Integer> players = currentPlayers.stream()
                 .filter(p -> p != player)
                 .map(playerToSmartness::get)
