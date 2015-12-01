@@ -1,11 +1,12 @@
 package WeakestLink.Players;
+import WeakestLink.Game.Game;
 import WeakestLink.Game.Vote;
 import java.util.Iterator;
 import java.util.Set;
 
 public class TheCult extends Player {
     //The cult has a secret code 2-8.
-    private static final int secret_code = 7;//new Random().nextInt(7)+2;
+    private static final int secret_code = Game.random.nextInt(7)+2;
     private int cult_vote;
     private boolean[] isMember = null;
     @Override

@@ -7,11 +7,11 @@ import java.util.*;
 public class Game {
     public final static int MINIMUM_NUMBER_OF_ROUNDS = 1000;
     public final static int NUMBER_PLAYERS_PER_ROUND = 9;
+    public final static Random random = new Random();
 
     private final List<Class<? extends Player>> unusedPlayers;
     private final Set<Class<? extends Player>> allPlayers;
     private final int numRounds;
-    private final Random random;
     private final Scoreboard scoreboard;
 
     private boolean finished;
@@ -19,7 +19,6 @@ public class Game {
         allPlayers = new HashSet<>(PlayerFactory.getAllPlayerTypes());
         numRounds = Math.max(MINIMUM_NUMBER_OF_ROUNDS*allPlayers.size()/NUMBER_PLAYERS_PER_ROUND + 1,
                 MINIMUM_NUMBER_OF_ROUNDS);
-        random = new Random();
         unusedPlayers = new ArrayList<>(allPlayers);
         scoreboard = new Scoreboard();
         finished = false;
