@@ -13,6 +13,7 @@ public class PlayerFactory {
         playerCreators.put(RandomPlayer.class, RandomPlayer::new);
         playerCreators.put(MaxPlayer.class, MaxPlayer::new);
         playerCreators.put(MinPlayer.class, MinPlayer::new);
+        playerCreators.put(MeanPlayer.class, MeanPlayer::new);
 
     }
 
