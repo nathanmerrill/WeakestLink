@@ -17,7 +17,9 @@ public class PlayerFactory {
         playerCreators.put(Sniper.class, Sniper::new);
         playerCreators.put(MedianPlayer.class, MedianPlayer::new);
         playerCreators.put(TheCult.class, TheCult::new);
-
+        playerCreators.put(AntiExtremist.class, AntiExtremist::new);
+        //playerCreators.put(ApproximatePosition.class, ApproximatePosition::new);
+        playerCreators.put(Coward.class, Coward::new);
     }
 
     public static Collection<Class<? extends Player>> getAllPlayerTypes(){

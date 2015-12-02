@@ -105,7 +105,7 @@ public class Round {
                 .collect(Collectors.toSet());
         int vote = player.vote(players);
         if (!currentPlayers.contains(smartnessToPlayer.get(vote))){
-            throw new RuntimeException("Voted off non-existent player");
+            throw new RuntimeException(player.getClass().getSimpleName()+" voted off non-existent player");
         }
         return new Vote(playerToSmartness.get(player), vote, currentTurn);
     }
