@@ -20,6 +20,15 @@ public class PlayerFactory {
         playerCreators.put(AntiExtremist.class, AntiExtremist::new);
         //playerCreators.put(ApproximatePosition.class, ApproximatePosition::new);
         playerCreators.put(Coward.class, Coward::new);
+        //playerCreators.put(BridgeBurner.class, BridgeBurner::new);
+        playerCreators.put(FixatedPlayer.class, FixatedPlayer::new);
+        playerCreators.put(Guard.class, Guard::new);
+        playerCreators.put(Hero.class, Hero::new);
+        playerCreators.put(Leech.class, Leech::new);
+        playerCreators.put(PrudentSniper.class, PrudentSniper::new);
+        playerCreators.put(RevengePlayer.class, RevengePlayer::new);
+        playerCreators.put(SniperAide.class, SniperAide::new);
+        playerCreators.put(SniperKiller.class, SniperKiller::new);
     }
 
     public static Collection<Class<? extends Player>> getAllPlayerTypes(){

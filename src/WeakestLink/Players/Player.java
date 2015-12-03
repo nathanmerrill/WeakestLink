@@ -113,6 +113,9 @@ public abstract class Player {
      * @return The last vote you casted
      */
     protected Vote getLastVote(){
+        if (votingHistory.size() == 0) {
+            return null;
+        }
         return votingHistory.stream()
                 .filter(this::selfVotedFilter)
                 .filter(this::recentVoteFilter)
