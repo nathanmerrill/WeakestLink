@@ -16,7 +16,7 @@ public class Guard extends Player{
         int me = getSmartness();
         Set<Vote> history = getVotingHistory();
         history.removeIf(vote -> !currentOpponents.contains(vote.getVoter()) || vote.getVoter() == me);
-        int[] evilnessLevel = new int[Game.NUMBER_PLAYERS_PER_ROUND];
+        int[] evilnessLevel = new int[Game.NUMBER_PLAYERS_PER_ROUND+1];
         for (Vote vote : history){
             evilnessLevel[vote.getVoter()] += vote.getVoted() == me ? 1_000_000 : vote.getVoted();
         }

@@ -26,7 +26,7 @@ public class PrudentSniper extends Player {
 
         //identify enemies
         Iterator<Vote> votes = getRecentVotes().iterator();
-        boolean[] voted_for_me = new boolean[9];
+        boolean[] voted_for_me = new boolean[10];
 
         while(votes.hasNext()) {
             Vote opp_vote = votes.next();

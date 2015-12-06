@@ -8,11 +8,11 @@ import java.util.stream.Stream;
 public class BridgeBurner extends Player{
     @Override
     public int vote(Set<Integer> currentOpponents) {
-        List<Integer> votes_against = Stream.generate(() -> 0).limit(9).collect(Collectors.toList());
-        List<Integer> last_voted_against = Stream.generate(() -> 0).limit(9).collect(Collectors.toList());
+        List<Integer> votes_against = Stream.generate(() -> 0).limit(10).collect(Collectors.toList());
+        List<Integer> last_voted_against = Stream.generate(() -> 0).limit(10).collect(Collectors.toList());
         Iterator<Vote> votes_against_me = getVotesForSelf().iterator();
 
-        for (int c = 0; c < 9; c++){
+        for (int c = 1; c < 10; c++){
             if (!currentOpponents.contains(c)){
                 votes_against.set(c,-1);
                 last_voted_against.set(c,-1);
@@ -35,7 +35,7 @@ public class BridgeBurner extends Player{
         }
 
         int min_tally = Collections.max(votes_against);
-        for (int c = 0; c < 9; c++){
+        for (int c = 1; c < 10; c++){
             int current_tally = votes_against.get(c);
             if (current_tally != -1 && current_tally < min_tally){
                 min_tally = current_tally;
@@ -46,7 +46,7 @@ public class BridgeBurner extends Player{
             return votes_against.indexOf(min_tally);
         } else {
             List<Integer> temp_last_against = new ArrayList<>();
-            for (int c = 0; c < 9; c++){
+            for (int c = 1; c < 10; c++){
                 if (votes_against.get(c) == min_tally){
                     temp_last_against.add(last_voted_against.get(c));
                 }

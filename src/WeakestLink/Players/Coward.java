@@ -14,8 +14,8 @@ public class Coward extends Player {
             currentOpponent[opps.next().intValue()] = true;
         }
 
-        int[] voteCounts = new int[9];
-        for(int i=0; i<9; i++) {
+        int[] voteCounts = new int[10];
+        for(int i=1; i<10; i++) {
             voteCounts[i] = 0;
         }
 

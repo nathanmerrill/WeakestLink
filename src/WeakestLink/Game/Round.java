@@ -25,11 +25,11 @@ public class Round {
         playerToSmartness =
                 IntStream.range(0, currentPlayers.size())
                 .boxed()
-                .collect(Collectors.toMap(players::get, Function.identity()));
+                .collect(Collectors.toMap(players::get, i->i+1));
         smartnessToPlayer =
                 IntStream.range(0, currentPlayers.size())
                 .boxed()
-                .collect(Collectors.toMap(Function.identity(), players::get));
+                .collect(Collectors.toMap(i->i+1, players::get));
         currentPlayers.forEach(player -> player.setSmartness(playerToSmartness.get(player)));
         votes = new HashSet<>();
         ran = false;
