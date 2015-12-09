@@ -1,5 +1,4 @@
 package WeakestLink.Players;
-import java.util.Collections;
 import java.util.Set;
 import java.util.Iterator;
 import WeakestLink.Game.Vote;
@@ -9,7 +8,7 @@ public class RevengePlayer extends Player{
     public int vote(Set<Integer> opponents) {
         int[] A;
         A = new int[10];
-        for(int i = 1;i < 9;i++)
+        for(int i = 1;i < 10;i++)
             A[i] = opponents.contains(i)? i+1 : 0;
         Set<Vote> H = getVotingHistory();
         Iterator<Vote> I = H.iterator();
